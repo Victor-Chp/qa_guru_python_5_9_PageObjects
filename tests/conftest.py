@@ -6,3 +6,7 @@ from selene import browser
 def browser_management():
     browser.driver.set_window_size(1600, 1080)
     browser.config.base_url = 'https://demoqa.com'
+
+    yield
+
+    browser.quit()
