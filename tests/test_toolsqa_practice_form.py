@@ -1,38 +1,32 @@
-import os
-from selene import browser, have, command
+from selene import browser, have
+from demoqa_tests import resource
+from demoqa_tests.pages.registration_page import RegistrationPage
 
 
 def test_form_filling_submitting():
-    browser.open('/automation-practice-form')
+    registration_page = RegistrationPage()
+    registration_page.open()
 
-    browser.element('#firstName').set('Василий')
-    browser.element('#lastName').set('Алибабаев')
-    browser.element('#userEmail').set('alibabavas@gmail.com')
-    browser.element('[name=gender][value=Male]+label').click()
-    browser.element('#userNumber').set('9093335555')
+    # WHEN
+    registration_page.fill_first_name('Василий')
+    registration_page.fill_last_name('Алибабаев')
+    registration_page.fill_email('alibabavas@gmail.com')
+    registration_page.fill_gender('Male')
+    registration_page.fill_phone_number('9093335555')
+    registration_page.fill_date_of_birth('1980', 'July', '11')
 
-    browser.element('#dateOfBirthInput').click()
-    browser.element('.react-datepicker__year-select').send_keys('1980')
-    browser.element('.react-datepicker__month-select').send_keys('July')
-    browser.element('.react-datepicker__day--011').click()
+    registration_page.fill_subject('English')
+    registration_page.fill_subject('Accounting')
+    registration_page.fill_hobbie('Music')
+    registration_page.upload_picture('account.png')
 
-    browser.element('#subjectsInput').send_keys('English').press_enter().send_keys('Accounting').press_enter()
-    browser.all('#hobbiesWrapper .custom-checkbox').element_by(have.exact_text('Music')).click()
-    browser.element('#uploadPicture').send_keys(os.path.abspath(
-        os.path.join(os.path.dirname(__file__), os.path.pardir, 'tests/account.png')
-        )
-    )
+    registration_page.fill_address('проспект Революции 285 - 45')
+    registration_page.fill_state('Uttar Pradesh')
+    registration_page.fill_city('Agra')
+    registration_page.submit()
 
-    browser.element('#currentAddress').send_keys('проспект Революции 285 - 45')
-    browser.element('#state').click()
-    browser.element('#react-select-3-option-1').click()
-    browser.element('#city').click()
-    browser.element('#react-select-4-option-0').click()
-
-    browser.element('#submit').press_enter()
-
-    browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
-    browser.all('.table-responsive td:nth-child(2)').should(have.exact_texts(
+    # THEN
+    registration_page.should_registered_user_with(
         'Василий Алибабаев',
         'alibabavas@gmail.com',
         'Male',
@@ -42,12 +36,7 @@ def test_form_filling_submitting():
         'Music',
         'account.png',
         'проспект Революции 285 - 45',
-        'Uttar Pradesh Agra'
-    ))
+        'Uttar Pradesh Agra',
+    )
 
-
-    '''
-        При таком варианте отправляется форма, т.е. нажатие "Enter" нажимает конпку "Submit"
-        browser.element('#subjectsInput').send_keys('English', 'Accounting').press_enter()
-    '''
     ...
