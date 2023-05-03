@@ -29,17 +29,6 @@ def test_form_filling_submitting():
     registration_page.register(student)
 
     # THEN
-    registration_page.should_registered_user_with(
-        'Василий Алибабаев',
-        'alibabavas@gmail.com',
-        'Male',
-        '9093335555',
-        '11 July,1980',
-        'English, Accounting',
-        'Music',
-        'account.png',
-        'проспект Революции 285 - 45',
-        'Uttar Pradesh Agra',
-    )
+    registration_page.should_have_registered(student)
 
     ...

@@ -45,7 +45,30 @@ class RegistrationPage:
         ).click()
         browser.element('#submit').press_enter()
 
-    #
+    def should_have_registered(self, student):
+        full_name = f'{student.first_name} {student.last_name}'
+        date_of_birth = f'{student.date_of_birth.day} {student.date_of_birth.strftime("%B")},{student.date_of_birth.year}'
+        subjects = ', '.join(student.subjects)
+        hobbies = ', '.join(student.hobbies)
+        state_city = f'{student.state} {student.city}'
+
+        browser.all('.table-responsive td:nth-child(2)').should(
+            have.exact_texts(
+                full_name,
+                student.email,
+                student.genders,
+                str(student.phone_number),
+                date_of_birth,
+                subjects,
+                hobbies,
+                student.upload_filename,
+                student.current_address,
+                state_city
+            )
+        )
+
+        #
+
     # def fill_hobbie(self, value):
     #     browser.all('#hobbiesWrapper .custom-checkbox').element_by(
     #         have.exact_text(value)

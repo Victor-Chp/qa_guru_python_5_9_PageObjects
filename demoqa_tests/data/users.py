@@ -44,8 +44,3 @@ class User:
     current_address: str
     state: str
     city: str
-
-
-#     Gender.male.value
-#     Subject.maths.value
-#     Hobby.music.value
