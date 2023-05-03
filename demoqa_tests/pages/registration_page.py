@@ -39,6 +39,11 @@ class RegistrationPage:
         browser.all('[id^=react-select][id*=option]').element_by(
             have.exact_text(student.state)
         ).click()
+        browser.element('#city').click()
+        browser.all('[id^=react-select][id*=option]').element_by(
+            have.exact_text(student.city)
+        ).click()
+        browser.element('#submit').press_enter()
 
     #
     # def fill_hobbie(self, value):
