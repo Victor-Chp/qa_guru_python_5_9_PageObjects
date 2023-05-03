@@ -8,11 +8,9 @@ class RegistrationPage:
 
     def open(self):
         browser.open('/automation-practice-form')
-        # return self
 
     def fill_first_name(self, value):
         browser.element('#firstName').set(value)
-        # return self
 
     def fill_last_name(self, value):
         browser.element('#lastName').set(value)
@@ -20,7 +18,7 @@ class RegistrationPage:
     def fill_email(self, value):
         browser.element('#userEmail').set(value)
 
-    def fill_gender(self, value):
+    def select_gender(self, value):
         browser.element(f'[name=gender][value={value}]+label').click()
 
     def fill_phone_number(self, value):

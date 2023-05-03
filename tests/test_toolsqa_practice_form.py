@@ -1,5 +1,8 @@
+from datetime import date
+
 from selene import browser, have
 from demoqa_tests import resource
+from demoqa_tests.data.users import User, Gender, Subject, Hobby
 from demoqa_tests.pages.registration_page import RegistrationPage
 
 
@@ -11,7 +14,7 @@ def test_form_filling_submitting():
     registration_page.fill_first_name('Василий')
     registration_page.fill_last_name('Алибабаев')
     registration_page.fill_email('alibabavas@gmail.com')
-    registration_page.fill_gender('Male')
+    registration_page.select_gender('Male')
     registration_page.fill_phone_number('9093335555')
     registration_page.fill_date_of_birth('1980', 'July', '11')
 
