@@ -1,7 +1,4 @@
 from datetime import date
-
-from selene import browser, have
-from demoqa_tests import resource
 from demoqa_tests.data.users import User, Gender, Subject, Hobby
 from demoqa_tests.pages.registration_page import RegistrationPage
 
